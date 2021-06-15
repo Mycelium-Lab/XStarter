@@ -1,0 +1,159 @@
+body {
+  background-color: rgb(37, 41, 52);
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  display: inline-block;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  /* line-height: 1.5; */
+  border-radius: 8px;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button__outline {
+  border-color: rgb(255, 130, 75);
+  background-color: transparent;
+  color: #fff;
+}
+
+.button__outline:hover {
+  background-color: rgb(255, 103, 38);
+  border-color: rgb(255, 103, 38);
+  color: #fff;
+}
+
+.button__filled {
+  background-color: rgb(255, 130, 75);
+  border-color: rgb(255, 130, 75);
+  color: #fff;
+}
+
+.button__filled:hover,
+.button__filled:active {
+  background-color: rgb(255, 103, 38);
+  border-color: rgb(255, 103, 38);
+}
+
+.div__form-container {
+  position: relative;
+  background-color: rgb(58, 62, 72);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  width: 591px;
+  margin-top: 34px;
+}
+
+.div__form-container h3,
+.div__form-container span {
+  color: rgb(255, 130, 75);
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.div__form-container h3 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 26px;
+}
+
+.div__field-container {
+  margin: 35px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.div__field-container a,
+.div__field-container a:visited {
+  color: rgb(255, 130, 75);
+}
+
+.div__field-container a:active,
+.div__field-container a:hover {
+  color: #fff;
+}
+
+.div__twitter-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  width: 326px;
+}
+
+.div__twitter-info div:first-child {
+  max-width: 64%;
+}
+
+.div__twitter-info button {
+  width: 90px;
+  height: 44px;
+}
+
+.div__telegram-info {
+  margin-bottom: 30px;
+}
+
+.div__submission-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 95px;
+  margin-bottom: 50px;
+}
+
+.div__submission-buttons button:first-child {
+  height: 54px;
+  width: 220px;
+  padding: 13px 50px;
+}
+
+.div__form-container input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 12px;
+  width: 300px;
+  height: 40px;
+  background: #f9fafb;
+  border: 1px solid #e0e2e6;
+  box-shadow: inset 0px 1px 3px 0.5px #d1d1d6;
+  border-radius: 6px;
+}
+
+.div__form-container input::placeholder {
+  color: #6b7180;
+  font-size: 16px;
+  line-height: 28px;
+}
+
+.button__connect-wallet {
+  position: absolute;
+  top: 34px;
+  right: 90px;
+  height: 54px;
+  width: 200px;
+}
