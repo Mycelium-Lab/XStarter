@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import StatusIcon from './StatusIcon'
 import Web3 from 'web3'
 
 import '../styles/main.css'
@@ -34,7 +35,7 @@ export default function ConnectButton({connectionCallback}) {
     
     return (
         <div className="div__connect-wallet">
-            <button disabled={isConnected} onClick={connectToWallet} type="button" className="button__outline button__connect-wallet">{isConnected ? 'Connected' : 'Connect Wallet'}</button> 
+            <button disabled={isConnected} onClick={connectToWallet} type="button" className="button__outline button__connect-wallet">{isConnected ? <>Connected <StatusIcon/> </> : 'Connect Wallet' }</button> 
             { connectError }
         </div>
     )

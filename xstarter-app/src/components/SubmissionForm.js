@@ -36,9 +36,11 @@ export default function SubmissionForm() {
                                     {({ input, meta }) => (
                                         <>
                                             <input {...input} type="text" placeholder="Name" />
-                                            <div className="div__form-errors">
-                                                {meta.error && meta.touched && <span className="error">{meta.error}</span>}
-                                            </div>
+                                            { meta.error && meta.touched && 
+                                                <div className="div__form-errors">
+                                                    <span className="error">{meta.error}</span>
+                                                </div>
+                                            }
                                         </>
                                     )}
                                 </Field>
@@ -52,24 +54,29 @@ export default function SubmissionForm() {
                                     {({ input, meta }) => (
                                         <>
                                             <input {...input} type="text" placeholder="Surname" />
-                                            <div className="div__form-errors">
-                                                {meta.error && meta.touched && <span className="error">{meta.error}</span>}
-                                            </div>
+                                            { meta.error && meta.touched && 
+                                                <div className="div__form-errors">
+                                                    <span className="error">{meta.error}</span>
+                                                </div>
+                                            }
                                         </>
                                     )}
                                 </Field>
                             </div>
                             <div className="div__field-container">
                                 <Field
+                                    validate={required}
                                     name="eth_address"
                                     component="input"
                                 >
                                 {({ input, meta }) => (
                                     <>
                                         <input {...input} disabled type="text" placeholder="Eth address" />
-                                        <div className="div__form-errors">
-                                            {meta.error && meta.touched && <span className="error">{meta.error}</span>}
-                                        </div>
+                                        { meta.error && meta.touched && 
+                                            <div className="div__form-errors">
+                                                <span className="error">{meta.error}</span>
+                                            </div>
+                                        }
                                     </>
                                 )}
                                 </Field>
@@ -83,9 +90,11 @@ export default function SubmissionForm() {
                                     {({ input, meta }) => (
                                         <>
                                             <input {...input} type="number" placeholder="How much want to invest" />
-                                            <div className="div__form-errors">
-                                                {meta.error && meta.touched && <span className="error">{meta.error}</span>}
-                                            </div>
+                                            { meta.error && meta.touched && 
+                                                <div className="div__form-errors">
+                                                    <span className="error">{meta.error}</span>
+                                                </div>
+                                            }
                                         </>
                                     )}
                                 </Field>
