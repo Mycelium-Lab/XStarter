@@ -60,6 +60,7 @@ export default function SubmissionForm() {
     const required = value => (value ? undefined : 'Please fill in this mandatory field.')
     const requiredETHAddress = value => (value ? undefined : 'Please connect your wallet.')
     const mustBeNumber = value => (isNaN(value) ? 'Please enter a number.' : undefined)
+    const mustBeGreaterThanZero = value => (value <= 0 ? 'Please enter a number greater than 0.' : undefined)
     const nameValidator = value => ((/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(value)) ? undefined : 'This field must consist of letters only.')
     const composeValidators = (...validators) => value =>
         validators.reduce((error, validator) => error || validator(value), undefined)
@@ -135,7 +136,7 @@ export default function SubmissionForm() {
                             </div>
                             <div className="div__field-container">
                                 <Field
-                                    validate={composeValidators(required, mustBeNumber)}
+                                    validate={composeValidators(required, mustBeNumber, mustBeGreaterThanZero)}
                                     name="want_to_invest"
                                     component="input"
                                 >
