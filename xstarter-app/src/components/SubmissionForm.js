@@ -5,12 +5,6 @@ import Airtable from 'airtable'
 
 export default function SubmissionForm() {
     const _fields = ['name', 'surname', 'eth_address', 'want_to_invest', 'twitter', 'telegram']
-    const _initValues = _fields.reduce((acc, e) => {
-        acc[e] = undefined
-        return acc
-    }, {})
-
-    const [initValues, changeInitValues] = useState(_initValues) 
 
     const createAirTablePayload = values => ({
         ...values,
@@ -33,9 +27,9 @@ export default function SubmissionForm() {
             .then(() => {
                 console.log('Submitted successfully')
                 form.reset()
-                changeInitValues({
-                    ...initValues,
-                    eth_address: values.eth_address
+                _fields.forEach(e => {
+                    if (e === 'eth_address') form.mutators.setEthAddress(undefined, values.eth_address)
+                    else form.resetFieldState(e)
                 })
             })
             .catch(err => console.log('Error while sending your request'))
@@ -58,7 +52,7 @@ export default function SubmissionForm() {
                         changeValue(state, field, () => value)
                     }
                 }}
-                initialValues={initValues}
+                // initialValues={initValues}
                 render={({ handleSubmit, form, submitting, pristine, values }) => {
                     return (
                         <form onSubmit={async e => await handleSubmit(e, form)}>
