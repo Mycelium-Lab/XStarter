@@ -14,7 +14,7 @@ export default function ConnectButton({connectionCallback}) {
         if (ethAddress !== "") connectionCallback(ethAddress)
     }, [ethAddress])
 
-    const errorNoWallet = <span className="error">Cannot connect to your wallet. Please make sure you have it <a target="_blank" rel="noopener noreferrer" href="https://metamask.io/">installed</a>.</span> 
+    const errorNoWallet = <span className="error">Cannot connect to your wallet. Please make sure you have one <a target="_blank" rel="noopener noreferrer" href="https://metamask.io/">installed</a>  and your browser supports it.</span> 
     const errorConnectionTrouble = <span className="error">Cannot connect to MetaMask. Please try again.</span>
 
     const connectToWallet = async () => {

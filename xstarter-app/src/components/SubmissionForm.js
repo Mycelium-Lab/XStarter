@@ -8,6 +8,7 @@ export default function SubmissionForm() {
     }
 
     const required = value => (value ? undefined : 'This field is required.')
+    const requiredETHAddress = value => (value ? undefined : 'Please connect your wallet.')
     const mustBeNumber = value => (isNaN(value) ? 'This field must be a number.' : undefined)
     const nameValidator = value => ((/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(value)) ? undefined : 'This field must consist of letters only.')
     const composeValidators = (...validators) => value =>
@@ -35,7 +36,7 @@ export default function SubmissionForm() {
                                 >
                                     {({ input, meta }) => (
                                         <>
-                                            <input {...input} type="text" placeholder="Name" />
+                                            <input {...input} type="text" placeholder="Name *" />
                                             { meta.error && meta.touched && 
                                                 <div className="div__form-errors">
                                                     <span className="error">{meta.error}</span>
@@ -53,7 +54,7 @@ export default function SubmissionForm() {
                                 >
                                     {({ input, meta }) => (
                                         <>
-                                            <input {...input} type="text" placeholder="Surname" />
+                                            <input {...input} type="text" placeholder="Surname *" />
                                             { meta.error && meta.touched && 
                                                 <div className="div__form-errors">
                                                     <span className="error">{meta.error}</span>
@@ -65,13 +66,13 @@ export default function SubmissionForm() {
                             </div>
                             <div className="div__field-container">
                                 <Field
-                                    validate={required}
+                                    validate={requiredETHAddress}
                                     name="eth_address"
                                     component="input"
                                 >
                                 {({ input, meta }) => (
                                     <>
-                                        <input {...input} disabled type="text" placeholder="ETH address" />
+                                        <input {...input} disabled type="text" placeholder="ETH address *" />
                                         { meta.error && meta.touched && 
                                             <div className="div__form-errors">
                                                 <span className="error">{meta.error}</span>
@@ -89,7 +90,7 @@ export default function SubmissionForm() {
                                 >
                                     {({ input, meta }) => (
                                         <>
-                                            <input {...input} type="number" placeholder="Amount to invest (ETH)" />
+                                            <input {...input} type="number" placeholder="Amount to invest (ETH) *" />
                                             { meta.error && meta.touched && 
                                                 <div className="div__form-errors">
                                                     <span className="error">{meta.error}</span>
@@ -127,7 +128,7 @@ export default function SubmissionForm() {
                                 />
                             </div>
                             <div className="div__submission-buttons">
-                                <button className="button__filled button__join-whitelist" type="submit" disabled={submitting || pristine}>
+                                <button className="button__filled button__join-whitelist" type="submit" disabled={submitting}>
                                     Join whitelist
                                 </button>
                             </div>
