@@ -6,8 +6,6 @@ import '../styles/main.css'
 
 export default function Main() {
     return (
-        <div>
-            <SubmissionForm/>
-        </div>
+        <SubmissionForm/>
     )
 }

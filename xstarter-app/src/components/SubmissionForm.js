@@ -71,7 +71,7 @@ export default function SubmissionForm() {
                                 >
                                 {({ input, meta }) => (
                                     <>
-                                        <input {...input} disabled type="text" placeholder="Eth address" />
+                                        <input {...input} disabled type="text" placeholder="ETH address" />
                                         { meta.error && meta.touched && 
                                             <div className="div__form-errors">
                                                 <span className="error">{meta.error}</span>
@@ -89,7 +89,7 @@ export default function SubmissionForm() {
                                 >
                                     {({ input, meta }) => (
                                         <>
-                                            <input {...input} type="number" placeholder="How much want to invest" />
+                                            <input {...input} type="number" placeholder="Amount to invest (ETH)" />
                                             { meta.error && meta.touched && 
                                                 <div className="div__form-errors">
                                                     <span className="error">{meta.error}</span>
@@ -102,7 +102,7 @@ export default function SubmissionForm() {
                             <div className="div__field-container">
                                 <div className="div__twitter-info">
                                     <div>
-                                        <span>Subscribe for our Twitter and repost pinned post</span>
+                                        <span>Subscribe to our Twitter and repost the pinned post.</span>
                                     </div>
                                     <div>
                                         <button type="button" className="button__outline">Twitter</button>
@@ -112,18 +112,18 @@ export default function SubmissionForm() {
                                     name="twitter"
                                     component="input"
                                     type="text"
-                                    placeholder="Your twitter account username"
+                                    placeholder="Twitter username"
                                 />
                             </div>
                             <div className="div__field-container">
                                 <div className="div__telegram-info">
-                                    <span>Subscribe our <a href="#" target="_blank" rel="noopener noreferrer">Telegram channel</a> and <a target="_blank" rel="noopener noreferrer" href="#">chat</a></span>
+                                    <span>Subscribe to our <a href="#" target="_blank" rel="noopener noreferrer">Telegram channel</a> and <a target="_blank" rel="noopener noreferrer" href="#">chat</a>.</span>
                                 </div>
                                 <Field
                                     name="telegram"
                                     component="input"
                                     type="text"
-                                    placeholder="Your telegram username"
+                                    placeholder="Telegram username"
                                 />
                             </div>
                             <div className="div__submission-buttons">

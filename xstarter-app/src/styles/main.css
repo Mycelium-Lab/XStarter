@@ -188,8 +188,8 @@ button {
 
 .button__connect-wallet:disabled,
 .button__connect-wallet[disabled] {
-  border: 1px solid #999999;
-  background-color: #dadada;
+  border: 1px solid #dddddd;
+  background-color: #dddddd;
   color: #666666;
   cursor: default;
 }
@@ -203,8 +203,9 @@ button {
 
 input:disabled,
 input[disabled] {
-  background-color: #dadada;
-  border: 1px solid #dadada;
+  background-color: #dddddd;
+  border: 1px solid #dddddd;
+  color: #666666;
 }
 
 .div__form-errors {
