@@ -8,6 +8,8 @@ body {
 .App {
   display: flex;
   justify-content: center;
+  height: 100vh;
+  width: 100vw;
 }
 
 button {
@@ -62,7 +64,26 @@ button {
   align-items: center;
   border-radius: 8px;
   box-sizing: inherit;
-  margin-top: 34px;
+}
+
+@media (max-height: 960px) {
+  .App {
+    align-items: flex-start;
+  }
+
+  .div__form-container {
+    margin-top: 34px;
+  }
+}
+
+@media (min-height: 960px) {
+  .App {
+    align-items: center;
+  }
+
+  .div__form-container {
+    margin-top: 0px;
+  }
 }
 
 @media (min-width: 1200px) {
