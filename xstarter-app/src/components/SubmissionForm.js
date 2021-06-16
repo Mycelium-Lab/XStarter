@@ -1,10 +1,44 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Form, Field } from 'react-final-form'
 import ConnectButton from './ConnectButton'
+import Airtable from 'airtable'
 
 export default function SubmissionForm() {
-    const onSubmit = async values => {
-        alert(JSON.stringify(values))
+    const _fields = ['name', 'surname', 'eth_address', 'want_to_invest', 'twitter', 'telegram']
+    const _initValues = _fields.reduce((acc, e) => {
+        acc[e] = undefined
+        return acc
+    }, {})
+
+    const [initValues, changeInitValues] = useState(_initValues) 
+
+    const createAirTablePayload = values => ({
+        ...values,
+        want_to_invest: values.want_to_invest ? parseFloat(values.want_to_invest) : 0,
+        twitter: values.twitter ? `https://twitter.com/${values.twitter}` : null,
+        telegram: values.telegram ? `https://t.me/${values.telegram}` : null
+    })
+
+    const onSubmit = async (values, form) => {
+        let base 
+        try {
+            base = new Airtable({
+                apiKey: process.env.REACT_APP_AIRTABLE_API_KEY
+            }).base(process.env.REACT_APP_AIRTABLE_DB_NAME)
+        } catch {
+            console.error('Cannot connect to db')
+        }
+        base(process.env.REACT_APP_AIRTABLE_TABLE_NAME)
+            .create(createAirTablePayload(values))
+            .then(() => {
+                console.log('Submitted successfully')
+                form.reset()
+                changeInitValues({
+                    ...initValues,
+                    eth_address: values.eth_address
+                })
+            })
+            .catch(err => console.log('Error while sending your request'))
     }
 
     const required = value => (value ? undefined : 'This field is required.')
@@ -24,9 +58,10 @@ export default function SubmissionForm() {
                         changeValue(state, field, () => value)
                     }
                 }}
+                initialValues={initValues}
                 render={({ handleSubmit, form, submitting, pristine, values }) => {
                     return (
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={async e => await handleSubmit(e, form)}>
                             <ConnectButton connectionCallback={value => form.mutators.setEthAddress(undefined, value)}/>
                             <div className="div__field-container">
                                 <Field
@@ -37,7 +72,7 @@ export default function SubmissionForm() {
                                     {({ input, meta }) => (
                                         <>
                                             <input {...input} type="text" placeholder="Name *" />
-                                            { meta.error && meta.touched && 
+                                            { meta.error && meta.touched &&
                                                 <div className="div__form-errors">
                                                     <span className="error">{meta.error}</span>
                                                 </div>
