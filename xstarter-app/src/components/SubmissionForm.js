@@ -1,6 +1,8 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Form, Field } from 'react-final-form'
 import ConnectButton from './ConnectButton'
+import Loading from './Loading'
+import StyledAlert from './StyledAlert'
 import Airtable from 'airtable'
 
 export default function SubmissionForm() {
@@ -13,6 +15,9 @@ export default function SubmissionForm() {
         telegram: values.telegram ? `https://t.me/${values.telegram}` : null
     })
 
+    const [submissionStatusComponent, changeSubmissionStatusComponent] = useState(null)
+    const createSubmissionStatusComponent = (msg, severity) => <StyledAlert severity={severity}>{msg}</StyledAlert>
+
     const onSubmit = async (values, form) => {
         let base 
         try {
@@ -20,24 +25,41 @@ export default function SubmissionForm() {
                 apiKey: process.env.REACT_APP_AIRTABLE_API_KEY
             }).base(process.env.REACT_APP_AIRTABLE_DB_NAME)
         } catch {
-            console.error('Cannot connect to db')
+            changeSubmissionStatusComponent(
+                createSubmissionStatusComponent(
+                    'Cannot connect to our database. Please refresh the page to try again.',
+                    'danger'
+                )
+            )
         }
-        base(process.env.REACT_APP_AIRTABLE_TABLE_NAME)
+        await base(process.env.REACT_APP_AIRTABLE_TABLE_NAME)
             .create(createAirTablePayload(values))
             .then(() => {
-                console.log('Submitted successfully')
+                changeSubmissionStatusComponent(
+                    createSubmissionStatusComponent(
+                        'Thank you! Your request has been successfully submitted.',
+                        'success'
+                    )
+                )
                 form.reset()
                 _fields.forEach(e => {
                     if (e === 'eth_address') form.mutators.setEthAddress(undefined, values.eth_address)
                     else form.resetFieldState(e)
                 })
             })
-            .catch(err => console.log('Error while sending your request'))
+            .catch(() => {
+                changeSubmissionStatusComponent(
+                    createSubmissionStatusComponent(
+                        'An error occured while processing your request. Please refresh the page to try again.',
+                        'danger'
+                    )
+                )
+            })
     }
 
-    const required = value => (value ? undefined : 'This field is required.')
+    const required = value => (value ? undefined : 'Please fill in this mandatory field.')
     const requiredETHAddress = value => (value ? undefined : 'Please connect your wallet.')
-    const mustBeNumber = value => (isNaN(value) ? 'This field must be a number.' : undefined)
+    const mustBeNumber = value => (isNaN(value) ? 'Please enter a number.' : undefined)
     const nameValidator = value => ((/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(value)) ? undefined : 'This field must consist of letters only.')
     const composeValidators = (...validators) => value =>
         validators.reduce((error, validator) => error || validator(value), undefined)
@@ -68,7 +90,7 @@ export default function SubmissionForm() {
                                             <input {...input} type="text" placeholder="Name *" />
                                             { meta.error && meta.touched &&
                                                 <div className="div__form-errors">
-                                                    <span className="error">{meta.error}</span>
+                                                    <span className="status-error">{meta.error}</span>
                                                 </div>
                                             }
                                         </>
@@ -86,7 +108,7 @@ export default function SubmissionForm() {
                                             <input {...input} type="text" placeholder="Surname *" />
                                             { meta.error && meta.touched && 
                                                 <div className="div__form-errors">
-                                                    <span className="error">{meta.error}</span>
+                                                    <span className="status-error">{meta.error}</span>
                                                 </div>
                                             }
                                         </>
@@ -104,7 +126,7 @@ export default function SubmissionForm() {
                                         <input {...input} disabled type="text" placeholder="ETH address *" />
                                         { meta.error && meta.touched && 
                                             <div className="div__form-errors">
-                                                <span className="error">{meta.error}</span>
+                                                <span className="status-error">{meta.error}</span>
                                             </div>
                                         }
                                     </>
@@ -122,7 +144,7 @@ export default function SubmissionForm() {
                                             <input {...input} type="number" placeholder="Amount to invest (ETH) *" />
                                             { meta.error && meta.touched && 
                                                 <div className="div__form-errors">
-                                                    <span className="error">{meta.error}</span>
+                                                    <span className="status-error">{meta.error}</span>
                                                 </div>
                                             }
                                         </>
@@ -156,10 +178,12 @@ export default function SubmissionForm() {
                                     placeholder="Telegram username"
                                 />
                             </div>
-                            <div className="div__submission-buttons">
-                                <button className="button__filled button__join-whitelist" type="submit" disabled={submitting}>
-                                    Join whitelist
-                                </button>
+                            <div className="div__submission-details">
+                                { submissionStatusComponent || 
+                                    <button className="button__filled button__join-whitelist" type="submit" disabled={submitting}>
+                                        { submitting ? <Loading/> : 'Join whitelist' }
+                                    </button>
+                                }
                             </div>
                         </form>
                     )
