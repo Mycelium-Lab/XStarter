@@ -256,7 +256,6 @@ button {
 .div__form-container input::placeholder {
   color: #6b7180;
   font-size: 16px;
-  line-height: 28px;
 }
 
 .div__connect-wallet {
