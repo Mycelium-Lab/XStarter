@@ -28,7 +28,7 @@ export default function SubmissionForm() {
             changeSubmissionStatusComponent(
                 createSubmissionStatusComponent(
                     'Cannot connect to our database. Please refresh the page to try again.',
-                    'danger'
+                    'error'
                 )
             )
         }
@@ -51,7 +51,7 @@ export default function SubmissionForm() {
                 changeSubmissionStatusComponent(
                     createSubmissionStatusComponent(
                         'An error occured while processing your request. Please refresh the page to try again.',
-                        'danger'
+                        'error'
                     )
                 )
             })
