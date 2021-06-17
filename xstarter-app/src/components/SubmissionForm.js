@@ -61,7 +61,7 @@ export default function SubmissionForm() {
     const requiredETHAddress = value => (value ? undefined : 'Please connect your wallet.')
     const mustBeNumber = value => (isNaN(value) ? 'Please enter a number.' : undefined)
     const mustBeGreaterThanZero = value => (value <= 0 ? 'Please enter a number greater than 0.' : undefined)
-    const nameValidator = value => ((/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(value)) ? undefined : 'This field must consist of letters only.')
+    const nameValidator = value => ((/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(value)) ? undefined : 'Please fill in this field with letters only.')
     const composeValidators = (...validators) => value =>
         validators.reduce((error, validator) => error || validator(value), undefined)
 
