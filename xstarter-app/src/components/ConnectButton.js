@@ -30,11 +30,11 @@ export default function ConnectButton({connectionCallback}) {
             changeConnecting(true)
             await provider.enable()
             const web3 = new Web3(provider)
-            const account = await web3.eth.getAccounts()
-            if (account) {
+            const accounts = await web3.eth.getAccounts()
+            if (accounts) {
                 changeConnecting(false)
                 changeConnected(true)
-                changeEthAddress(account)
+                changeEthAddress(accounts[0])
             }
             else changeConnectError(errorNoWallet)
         } catch (error) {
