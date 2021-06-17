@@ -75,7 +75,6 @@ export default function SubmissionForm() {
                         changeValue(state, field, () => value)
                     }
                 }}
-                // initialValues={initValues}
                 render={({ handleSubmit, form, submitting, pristine, values }) => {
                     return (
                         <form onSubmit={async e => await handleSubmit(e, form)}>
@@ -88,7 +87,7 @@ export default function SubmissionForm() {
                                 >
                                     {({ input, meta }) => (
                                         <>
-                                            <input {...input} type="text" maxLength="255" placeholder="Name *" />
+                                            <input {...input} className={!meta.touched ? '' : !meta.error ? 'input__ok' : 'input__error'} type="text" maxLength="255" placeholder="Name *" />
                                             { meta.error && meta.touched &&
                                                 <div className="div__form-errors">
                                                     <span className="status-error">{meta.error}</span>
@@ -106,7 +105,7 @@ export default function SubmissionForm() {
                                 >
                                     {({ input, meta }) => (
                                         <>
-                                            <input {...input} type="text" maxLength="255" placeholder="Surname *" />
+                                            <input {...input} className={!meta.touched ? '' : !meta.error ? 'input__ok' : 'input__error'} type="text" maxLength="255" placeholder="Surname *" />
                                             { meta.error && meta.touched && 
                                                 <div className="div__form-errors">
                                                     <span className="status-error">{meta.error}</span>
@@ -124,7 +123,7 @@ export default function SubmissionForm() {
                                 >
                                 {({ input, meta }) => (
                                     <>
-                                        <input {...input} disabled type="text" placeholder="ETH address *" />
+                                        <input {...input} className={!meta.error ? 'input__ok' : ''} disabled type="text" placeholder="ETH address *" />
                                         { meta.error && meta.touched && 
                                             <div className="div__form-errors">
                                                 <span className="status-error">{meta.error}</span>
@@ -142,7 +141,7 @@ export default function SubmissionForm() {
                                 >
                                     {({ input, meta }) => (
                                         <>
-                                            <input {...input} type="number" placeholder="Amount to invest (ETH) *" />
+                                            <input {...input} className={!meta.touched ? '' : !meta.error ? 'input__ok' : 'input__error'} type="number" placeholder="Amount to invest (ETH) *" />
                                             { meta.error && meta.touched && 
                                                 <div className="div__form-errors">
                                                     <span className="status-error">{meta.error}</span>
@@ -162,31 +161,37 @@ export default function SubmissionForm() {
                                     </div>
                                 </div>
                                 <Field
-                                    validate={mustBeGreaterThanZero}
                                     name="twitter"
                                     component="input"
                                     type="text"
                                     placeholder="Twitter username"
                                     maxLength="255"
-                                />
+                                >
+                                    {({ input, meta }) => (
+                                        <input {...input} className={!meta.touched ? '' : !meta.error ? 'input__ok' : 'input__error'} placeholder="Twitter username" />
+                                    )}
+                                </Field>
                             </div>
                             <div className="div__field-container">
                                 <div className="div__telegram-info">
                                     <span>Subscribe to our <a href="#" target="_blank" rel="noopener noreferrer">Telegram channel</a> and <a target="_blank" rel="noopener noreferrer" href="#">chat</a>.</span>
                                 </div>
                                 <Field
-                                    validate={mustBeGreaterThanZero}
                                     name="telegram"
                                     component="input"
                                     type="text"
                                     placeholder="Telegram username"
                                     maxLength="255"
-                                />
+                                >
+                                    {({ input, meta }) => (
+                                        <input {...input} className={!meta.touched ? '' : !meta.error ? 'input__ok' : 'input__error'} placeholder="Telegram username" />
+                                    )}
+                                </Field>
                             </div>
                             <div className="div__submission-details">
                                 { submissionStatusComponent || 
                                     <button className="button__filled button__join-whitelist" type="submit" disabled={submitting}>
-                                        { submitting ? <Loading/> : 'Join whitelist' }
+                                        { submitting ? <Loading/> : 'Join Whitelist' }
                                     </button>
                                 }
                             </div>

@@ -86,7 +86,7 @@ button {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1235px) {
   .div__form-container {
     position: relative;
   }
@@ -103,7 +103,7 @@ button {
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1235px) {
   .div__connect-wallet {
     justify-content: center;
     align-items: center;
@@ -143,7 +143,7 @@ button {
 .div__form-container h3 {
   font-style: normal;
   font-weight: normal;
-  font-size: 22px;
+  font-size: 24px;
   line-height: 26px;
   margin: 40px 0;
 }
@@ -223,7 +223,27 @@ button {
   background: #f9fafb;
   border: 1px solid #e0e2e6;
   box-shadow: inset 0px 1px 3px 0.5px #d1d1d6;
+  outline-color: rgb(255, 130, 75);
+  font-size: 16px;
   border-radius: 6px;
+}
+
+.div__form-container input:focus {
+  border: 1px solid rgb(255, 130, 75);
+  outline: none !important;
+  box-shadow: 0 0 4px rgb(255, 154, 110);
+}
+
+.div__form-container input.input__ok {
+  border: 1px solid rgb(93, 216, 93);
+  outline: none !important;
+  box-shadow: 0 0 4px rgb(139, 255, 139);
+}
+
+.div__form-container input.input__error {
+  border: 1px solid rgb(255, 56, 56);
+  outline: none !important;
+  box-shadow: 0 0 4px rgb(255, 93, 93);
 }
 
 .div__form-container input::placeholder {
@@ -300,4 +320,5 @@ input[disabled] {
 
 .svg___connection-status {
   fill: rgb(93, 216, 93);
+  margin-left: 3px;
 }
