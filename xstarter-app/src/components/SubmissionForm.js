@@ -3,6 +3,7 @@ import { Form, Field } from 'react-final-form'
 import ConnectButton from './ConnectButton'
 import Loading from './Loading'
 import StyledAlert from './StyledAlert'
+import StyledTooltip from './StyledTooltip'
 import Airtable from 'airtable'
 
 export default function SubmissionForm() {
@@ -115,24 +116,26 @@ export default function SubmissionForm() {
                                     )}
                                 </Field>
                             </div>
-                            <div className="div__field-container">
-                                <Field
-                                    validate={requiredETHAddress}
-                                    name="eth_address"
-                                    component="input"
-                                >
-                                {({ input, meta }) => (
-                                    <>
-                                        <input {...input} className={!meta.error ? 'input__ok' : meta.touched ? 'input__error' : ''} disabled type="text" placeholder="ETH address *" />
-                                        { meta.error && meta.touched && 
-                                            <div className="div__form-errors">
-                                                <span className="status-error">{meta.error}</span>
-                                            </div>
-                                        }
-                                    </>
-                                )}
-                                </Field>
-                            </div>
+                            <StyledTooltip placement="top" title="Requires a wallet connection." arrow={true}>
+                                <div className="div__field-container">
+                                    <Field
+                                        validate={requiredETHAddress}
+                                        name="eth_address"
+                                        component="input"
+                                    >
+                                    {({ input, meta }) => (
+                                        <>
+                                            <input {...input} className={!meta.error ? 'input__ok' : meta.touched ? 'input__error' : ''} type="text" readonly="readonly" placeholder="ETH address *" />
+                                            { meta.error && meta.touched && 
+                                                <div className="div__form-errors">
+                                                    <span className="status-error">{meta.error}</span>
+                                                </div>
+                                            }
+                                        </>
+                                    )}
+                                    </Field>
+                                </div>
+                            </StyledTooltip>
                             <div className="div__field-container">
                                 <Field
                                     validate={composeValidators(required, mustBeNumber, mustBeGreaterThanZero)}

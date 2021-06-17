@@ -300,11 +300,12 @@ button {
   cursor: default;
 }
 
-input:disabled,
-input[disabled] {
+input:read-only,
+input[read-only] {
   background-color: #dddddd;
   border: 1px solid #dddddd;
   color: #666666;
+  cursor: default;
 }
 
 .div__form-errors {
