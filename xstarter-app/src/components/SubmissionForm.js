@@ -88,7 +88,7 @@ export default function SubmissionForm() {
                                 >
                                     {({ input, meta }) => (
                                         <>
-                                            <input {...input} type="text" placeholder="Name *" />
+                                            <input {...input} type="text" maxLength="255" placeholder="Name *" />
                                             { meta.error && meta.touched &&
                                                 <div className="div__form-errors">
                                                     <span className="status-error">{meta.error}</span>
@@ -106,7 +106,7 @@ export default function SubmissionForm() {
                                 >
                                     {({ input, meta }) => (
                                         <>
-                                            <input {...input} type="text" placeholder="Surname *" />
+                                            <input {...input} type="text" maxLength="255" placeholder="Surname *" />
                                             { meta.error && meta.touched && 
                                                 <div className="div__form-errors">
                                                     <span className="status-error">{meta.error}</span>
@@ -162,10 +162,12 @@ export default function SubmissionForm() {
                                     </div>
                                 </div>
                                 <Field
+                                    validate={mustBeGreaterThanZero}
                                     name="twitter"
                                     component="input"
                                     type="text"
                                     placeholder="Twitter username"
+                                    maxLength="255"
                                 />
                             </div>
                             <div className="div__field-container">
@@ -173,10 +175,12 @@ export default function SubmissionForm() {
                                     <span>Subscribe to our <a href="#" target="_blank" rel="noopener noreferrer">Telegram channel</a> and <a target="_blank" rel="noopener noreferrer" href="#">chat</a>.</span>
                                 </div>
                                 <Field
+                                    validate={mustBeGreaterThanZero}
                                     name="telegram"
                                     component="input"
                                     type="text"
                                     placeholder="Telegram username"
+                                    maxLength="255"
                                 />
                             </div>
                             <div className="div__submission-details">
