@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Form, Field } from 'react-final-form'
-import ConnectButton from './ConnectButton'
+import WalletConnect from './WalletConnect'
 import Loading from './Loading'
 import StyledAlert from './styled-mui/StyledAlert'
 import StyledTooltip from './styled-mui/StyledTooltip'
@@ -79,7 +79,7 @@ export default function SubmissionForm() {
                 render={({ handleSubmit, form, submitting, pristine, values }) => {
                     return (
                         <form onSubmit={async e => await handleSubmit(e, form)}>
-                            <ConnectButton connectionCallback={value => form.mutators.setEthAddress(undefined, value)}/>
+                            <WalletConnect connectionCallback={value => form.mutators.setEthAddress(undefined, value)}/>
                             <div className="div__field-container">
                                 <Field
                                     validate={composeValidators(required, nameValidator)}
