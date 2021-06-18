@@ -116,7 +116,7 @@ export default function SubmissionForm() {
                                     )}
                                 </Field>
                             </div>
-                            <StyledTooltip placement="top" title="Requires a wallet connection." arrow={true}>
+                            <StyledTooltip placement="top" title={values.eth_address ?? "Requires a wallet connection."} arrow={true}>
                                 <div className="div__field-container">
                                     <Field
                                         validate={requiredETHAddress}
