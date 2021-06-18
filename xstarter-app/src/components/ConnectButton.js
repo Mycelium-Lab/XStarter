@@ -3,6 +3,9 @@ import StatusIcon from './StatusIcon'
 import Loading from './Loading'
 import Web3 from 'web3'
 import { BrowserView, MobileView } from 'react-device-detect'
+import StyledInfoIcon from './styled-mui/StyledInfoIcon'
+import Fade from '@material-ui/core/Fade'
+import StyledAlertInfo from './styled-mui/StyledAlertInfo'
 import WalletConnectProvider from "@walletconnect/web3-provider"
 
 import '../styles/main.css'
@@ -13,6 +16,7 @@ export default function ConnectButton({connectionCallback}) {
     const [connecting, changeConnecting] = useState(false)
     const [ethAddress, changeEthAddress] = useState("")
     const [connectError, changeConnectError] = useState(null)
+    const [displayInfoAlert, changeDisplayInfoAlert] = useState(false)
 
     useEffect(() => {
         if (ethAddress !== "") connectionCallback(ethAddress)
@@ -64,14 +68,22 @@ export default function ConnectButton({connectionCallback}) {
 
     const connectButton = (callBackOnPress) => 
         <button disabled={isConnected || connecting} onClick={callBackOnPress} type="button" className="button__outline button__connect-wallet">{isConnected ? <>Connected <StatusIcon/> </> : connecting ? <Loading/> : 'Connect Wallet' }</button> 
-    
+
+    const infoAlert = <StyledAlertInfo variant="outlined" severity="info">Connection may take a while in your wallet app. Please be patient.</StyledAlertInfo>
+
     return (
         <div className="div__connect-wallet">
             <BrowserView>
                 { connectButton(connectToWallet) }
             </BrowserView>
             <MobileView>
-                { connectButton(connectToMobileWallet) }
+                <div>
+                    { connectButton(connectToMobileWallet) }
+                    { <StyledInfoIcon onClick={() => changeDisplayInfoAlert(!displayInfoAlert)}/> }
+                </div>
+                <Fade unmountOnExit={true} in={displayInfoAlert}>
+                    {infoAlert}
+                </Fade>
             </MobileView>
             { connectError }
         </div>

@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Form, Field } from 'react-final-form'
 import ConnectButton from './ConnectButton'
 import Loading from './Loading'
-import StyledAlert from './StyledAlert'
-import StyledTooltip from './StyledTooltip'
+import StyledAlert from './styled-mui/StyledAlert'
+import StyledTooltip from './styled-mui/StyledTooltip'
 import Airtable from 'airtable'
 
 export default function SubmissionForm() {

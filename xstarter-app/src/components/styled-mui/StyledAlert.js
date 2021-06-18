@@ -5,7 +5,8 @@ import Alert from '@material-ui/lab/Alert'
 const styles = {
   root: {
     borderRadius: 8,
-    fontFamily: 'inherit'
+    fontFamily: 'inherit',
+    textAlign: 'center'
   },
 }
 

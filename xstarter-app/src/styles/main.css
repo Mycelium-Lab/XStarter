@@ -260,9 +260,20 @@ button {
 
 .div__connect-wallet {
   display: flex;
-  flex-direction: column;
-  /* text-align: justify; */
+  flex-direction: column;  
+  text-align: center;
   /* text-justify: distribute-all-lines; */
+}
+
+.div__connect-wallet > div > div:first-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.div__connect-wallet > div > div:not(:first-child) {
+  margin-top: 18px;
 }
 
 .div__connect-wallet span {
