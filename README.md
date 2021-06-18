@@ -32,10 +32,10 @@ REACT_APP_INFURA_PROJECT_ID=(4)
 
 <h3>Running</h3>
 <p>To run the app on localhost, please enter:</p>
-```console
+<pre>
 cd xstarter-app
 npm i 
 npm start
-```
+</pre>
 
 
