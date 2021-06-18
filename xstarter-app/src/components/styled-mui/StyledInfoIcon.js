@@ -6,8 +6,9 @@ const styles = {
   root: {
     fontSize: 26,
     fontWeight: 200,
-    color: '#fff',
-    marginLeft: 10
+    color: '#DFDFDF',
+    marginLeft: 10,
+    opacity: 0.9
   },
 }
 

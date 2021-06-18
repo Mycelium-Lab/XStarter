@@ -73,12 +73,19 @@ export default function ConnectButton({connectionCallback}) {
     const connectButton = (callBackOnPress) => 
         <button disabled={isConnected || connecting} onClick={callBackOnPress} type="button" className="button__outline button__connect-wallet">{isConnected ? <>Connected <StatusIcon/> </> : connecting ? <Loading/> : 'Connect Wallet' }</button> 
 
-    const infoAlert = <StyledAlertInfo variant="outlined" severity="info">Connection may take a while in your wallet app. Please be patient.</StyledAlertInfo>
+    const infoAlertSlow = <StyledAlertInfo variant="outlined" severity="info">Connection may take a while in your wallet app. Please be patient.</StyledAlertInfo>
+    const infoAlertCache = <StyledAlertInfo variant="outlined" severity="info">If your wallet or wallet address has changed, you may need to clear your browser cache.</StyledAlertInfo>
 
     return (
         <div className="div__connect-wallet">
             <BrowserView>
-                { connectButton(connectToWallet) }
+                <div>
+                    { connectButton(connectToWallet) }
+                    { <StyledInfoIcon onMouseEnter={() => changeDisplayInfoAlert(true)} onMouseLeave={() => changeDisplayInfoAlert(false)}/> }
+                </div>
+                <Fade unmountOnExit={true} in={displayInfoAlert}>
+                    {infoAlertCache}
+                </Fade>
             </BrowserView>
             <MobileView>
                 <div>
@@ -86,7 +93,10 @@ export default function ConnectButton({connectionCallback}) {
                     { <StyledInfoIcon onClick={() => changeDisplayInfoAlert(!displayInfoAlert)}/> }
                 </div>
                 <Fade unmountOnExit={true} in={displayInfoAlert}>
-                    {infoAlert}
+                    {infoAlertSlow}
+                </Fade>
+                <Fade unmountOnExit={true} in={displayInfoAlert}>
+                    {infoAlertCache}
                 </Fade>
             </MobileView>
             { connectError }
