@@ -150,9 +150,9 @@ button {
 .div__form-container h3 {
   font-style: normal;
   font-weight: normal;
-  font-size: 24px;
+  font-size: 26px;
   line-height: 26px;
-  margin: 40px 0;
+  margin: 40px 0 60px 0;
 }
 
 .div__field-container {
