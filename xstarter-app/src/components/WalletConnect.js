@@ -35,16 +35,16 @@ export default function ConnectButton({connectionCallback}) {
             await provider.enable()
             const web3 = new Web3(provider)
             const accounts = await web3.eth.getAccounts()
+            changeConnecting(false)
             if (accounts) {
-                changeConnecting(false)
                 changeConnected(true)
                 changeEthAddress(accounts[0])
             }
             else changeConnectError(errorNoWallet)
         } catch (error) {
+            changeConnecting(false)
             changeConnectError(errorWalletConnectionTrouble)
         }
-        changeConnecting(false) 
     }
 
     const connectToWallet = async () => {
@@ -55,15 +55,19 @@ export default function ConnectButton({connectionCallback}) {
             try {
                 await window.ethereum.enable()
                 changeConnected(true)
-                const account = web3.currentProvider.selectedAddress
-                changeEthAddress(account)
-            } catch (error) {
-                changeConnectError(errorWalletConnectionTrouble)
+                const accounts = await web3.eth.getAccounts()
                 changeConnecting(false)
+                if (accounts) {
+                    changeConnected(true)
+                    changeEthAddress(accounts[0])
+                }
+                else changeConnectError(errorNoWallet)
+            } catch (error) {
+                changeConnecting(false)
+                changeConnectError(errorWalletConnectionTrouble)
             }
-        } else {
-            changeConnectError(errorNoWallet)
-        }
+        } 
+        else changeConnectError(errorNoWallet)
     }
 
     const connectButton = (callBackOnPress) => 
