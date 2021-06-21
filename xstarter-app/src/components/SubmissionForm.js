@@ -4,7 +4,6 @@ import WalletConnect from './WalletConnect'
 import Loading from './Loading'
 import StyledAlert from './styled-mui/StyledAlert'
 import StyledTooltip from './styled-mui/StyledTooltip'
-import Airtable from 'airtable'
 
 export default function SubmissionForm() {
     const _fields = ['name', 'surname', 'eth_address', 'want_to_invest', 'twitter', 'telegram']
@@ -22,42 +21,7 @@ export default function SubmissionForm() {
     const createSubmissionStatusComponent = (msg, severity) => <StyledAlert severity={severity}>{msg}</StyledAlert>
 
     const onSubmit = async (values, form) => {
-        let base 
-        try {
-            base = new Airtable({
-                apiKey: process.env.REACT_APP_AIRTABLE_API_KEY
-            }).base(process.env.REACT_APP_AIRTABLE_DB_NAME)
-        } catch {
-            changeSubmissionStatusComponent(
-                createSubmissionStatusComponent(
-                    'Cannot connect to our database. Please refresh the page to try again.',
-                    'error'
-                )
-            )
-        }
-        await base(process.env.REACT_APP_AIRTABLE_TABLE_NAME)
-            .create(createAirTablePayload(values))
-            .then(() => {
-                changeSubmissionStatusComponent(
-                    createSubmissionStatusComponent(
-                        'Thank you! Your request has been successfully submitted.',
-                        'success'
-                    )
-                )
-                form.reset()
-                _fields.forEach(e => {
-                    if (e === 'eth_address') form.mutators.setEthAddress(undefined, values.eth_address)
-                    else form.resetFieldState(e)
-                })
-            })
-            .catch(() => {
-                changeSubmissionStatusComponent(
-                    createSubmissionStatusComponent(
-                        'An error occured while processing your request. Please refresh the page to try again.',
-                        'error'
-                    )
-                )
-            })
+   
     }
 
     const required = value => (value ? undefined : 'Please fill in this mandatory field.')
