@@ -221,6 +221,31 @@ button {
   padding: 13px 50px;
 }
 
+.div__input-control{
+  position: relative;
+  width: 100%;
+}
+
+.div__input-anchor { 
+  position: absolute; 
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  margin-left: 1px;
+  font-family: 'Gill Sans Extrabold', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  background-color: #c2c2c2;
+  color: #757575;
+  height: 38px;
+  margin-top: 1px;
+  border-top: 1px solid #c2c2c2;
+  border-bottom: 1px solid #c2c2c2;
+  width: 40px;
+  border-radius: 5px 0 0 5px;
+  z-index: 9; 
+}
+
 .div__form-container input {
   display: flex;
   flex-direction: column;
@@ -260,6 +285,15 @@ button {
 .div__form-container input::placeholder {
   color: #6b7180;
   font-size: 16px;
+} 
+
+.div__with-anchor input {
+  padding-left: 52px;
+  width: calc(100% - 64px);
+}
+
+.div__with-anchor {
+  box-sizing: border-box;
 }
 
 .div__connect-wallet {

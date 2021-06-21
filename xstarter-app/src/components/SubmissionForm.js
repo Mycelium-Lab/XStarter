@@ -5,6 +5,7 @@ import Loading from './Loading'
 import StyledAlert from './styled-mui/StyledAlert'
 import StyledTooltip from './styled-mui/StyledTooltip'
 import Airtable from 'airtable'
+import { ReactComponent as EthereumLogo } from '../images/ethereum.svg'
 
 export default function SubmissionForm() {
     const _fields = ['name', 'surname', 'eth_address', 'want_to_invest', 'twitter', 'telegram']
@@ -89,14 +90,14 @@ export default function SubmissionForm() {
                                     component="input"
                                 >
                                     {({ input, meta }) => (
-                                        <>
+                                        <div className="div__input-control">
                                             <input {...input} className={!meta.touched ? '' : !meta.error ? 'input__ok' : 'input__error'} type="text" maxLength="255" placeholder="Name *" />
                                             { meta.error && meta.touched &&
                                                 <div className="div__form-errors">
                                                     <span className="status-error">{meta.error}</span>
                                                 </div>
                                             }
-                                        </>
+                                        </div>
                                     )}
                                 </Field>
                             </div>
@@ -107,14 +108,14 @@ export default function SubmissionForm() {
                                     component="input"
                                 >
                                     {({ input, meta }) => (
-                                        <>
+                                        <div className="div__input-control">
                                             <input {...input} className={!meta.touched ? '' : !meta.error ? 'input__ok' : 'input__error'} type="text" maxLength="255" placeholder="Surname *" />
                                             { meta.error && meta.touched && 
                                                 <div className="div__form-errors">
                                                     <span className="status-error">{meta.error}</span>
                                                 </div>
                                             }
-                                        </>
+                                        </div>
                                     )}
                                 </Field>
                             </div>
@@ -126,14 +127,14 @@ export default function SubmissionForm() {
                                         component="input"
                                     >
                                     {({ input, meta }) => (
-                                        <>
+                                        <div className="div__input-control">
                                             <input {...input} className={!meta.error ? 'input__ok' : meta.touched ? 'input__error' : ''} type="text" readOnly placeholder="ETH address *" />
                                             { meta.error && meta.touched && 
                                                 <div className="div__form-errors">
                                                     <span className="status-error">{meta.error}</span>
                                                 </div>
                                             }
-                                        </>
+                                        </div>
                                     )}
                                     </Field>
                                 </div>
@@ -145,14 +146,15 @@ export default function SubmissionForm() {
                                     component="input"
                                 >
                                     {({ input, meta }) => (
-                                        <>
+                                        <div className="div__input-control div__with-anchor">
+                                            <div className="div__input-anchor"><EthereumLogo/></div>
                                             <input {...input} className={!meta.touched ? '' : !meta.error ? 'input__ok' : 'input__error'} type="number" min="0" placeholder="Amount to invest (ETH) *" />
                                             { meta.error && meta.touched && 
                                                 <div className="div__form-errors">
                                                     <span className="status-error">{meta.error}</span>
                                                 </div>
                                             }
-                                        </>
+                                        </div>
                                     )}
                                 </Field>
                             </div>
@@ -173,7 +175,10 @@ export default function SubmissionForm() {
                                     maxLength="255"
                                 >
                                     {({ input, meta }) => (
-                                        <input {...input} className={!meta.touched ? '' : !meta.error ? 'input__ok' : 'input__error'} placeholder="Twitter username" />
+                                         <div className="div__input-control div__with-anchor">
+                                            <div className="div__input-anchor">@</div>
+                                            <input {...input} className={!meta.touched ? '' : !meta.error ? 'input__ok' : 'input__error'} placeholder="Twitter username" />
+                                        </div>
                                     )}
                                 </Field>
                             </div>
@@ -189,7 +194,10 @@ export default function SubmissionForm() {
                                     maxLength="255"
                                 >
                                     {({ input, meta }) => (
-                                        <input {...input} className={!meta.touched ? '' : !meta.error ? 'input__ok' : 'input__error'} placeholder="Telegram username" />
+                                         <div className="div__input-control div__with-anchor">
+                                            <div className="div__input-anchor">@</div>
+                                            <input {...input} className={!meta.touched ? '' : !meta.error ? 'input__ok' : 'input__error'} placeholder="Telegram username" />
+                                        </div>
                                     )}
                                 </Field>
                             </div>
