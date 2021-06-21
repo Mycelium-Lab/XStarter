@@ -3,7 +3,7 @@
 <span>Current Version <a href="https://awesome-varahamihira-41b940.netlify.app/">Test</a></span>
 
 <h3>Setup</h3>
-<p>To set up the application you need to react .env file in the xstarter-app folder. There you need to obtain and specify the following:</p>
+<p>To set up the application you need to create a .env file in the xstarter-app folder. There you need to specify the following after obtaining:</p>
 <ol>
     <li>Your Airtable API Key</li>
     <li>Your Airtable DB Name</li>
