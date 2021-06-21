@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import StatusIcon from './StatusIcon'
 import Loading from './Loading'
-import Web3 from 'web3'
 import { BrowserView, MobileView } from 'react-device-detect'
 import StyledInfoIcon from './styled-mui/StyledInfoIcon'
 import Fade from '@material-ui/core/Fade'
 import StyledAlertInfo from './styled-mui/StyledAlertInfo'
-import WalletConnectProvider from "@walletconnect/web3-provider"
 
 import '../styles/main.css'
 
@@ -26,48 +24,48 @@ export default function ConnectButton({connectionCallback}) {
     const errorWalletConnectionTrouble = <span className="status-error">Cannot connect to your wallet. Please try again.</span>
 
     const connectToMobileWallet = async () => {
-        changeConnectError(null)
-        try {
-            const provider = new WalletConnectProvider({
-                infuraId: process.env.REACT_APP_INFURA_PROJECT_ID,
-            })
-            changeConnecting(true)
-            await provider.enable()
-            const web3 = new Web3(provider)
-            const accounts = await web3.eth.getAccounts()
-            changeConnecting(false)
-            if (accounts) {
-                changeConnected(true)
-                changeEthAddress(accounts[0])
-            }
-            else changeConnectError(errorNoWallet)
-        } catch (error) {
-            changeConnecting(false)
-            changeConnectError(errorWalletConnectionTrouble)
-        }
+        // changeConnectError(null)
+        // try {
+        //     const provider = new WalletConnectProvider({
+        //         infuraId: process.env.REACT_APP_INFURA_PROJECT_ID,
+        //     })
+        //     changeConnecting(true)
+        //     await provider.enable()
+        //     const web3 = new Web3(provider)
+        //     const accounts = await web3.eth.getAccounts()
+        //     changeConnecting(false)
+        //     if (accounts) {
+        //         changeConnected(true)
+        //         changeEthAddress(accounts[0])
+        //     }
+        //     else changeConnectError(errorNoWallet)
+        // } catch (error) {
+        //     changeConnecting(false)
+        //     changeConnectError(errorWalletConnectionTrouble)
+        // }
     }
 
     const connectToWallet = async () => {
-        changeConnectError(null)
-        if (window.ethereum) {
-            changeConnecting(true)
-            const web3 = new Web3(window.ethereum)
-            try {
-                await window.ethereum.enable()
-                changeConnected(true)
-                const accounts = await web3.eth.getAccounts()
-                changeConnecting(false)
-                if (accounts) {
-                    changeConnected(true)
-                    changeEthAddress(accounts[0])
-                }
-                else changeConnectError(errorNoWallet)
-            } catch (error) {
-                changeConnecting(false)
-                changeConnectError(errorWalletConnectionTrouble)
-            }
-        } 
-        else changeConnectError(errorNoWallet)
+        // changeConnectError(null)
+        // if (window.ethereum) {
+        //     changeConnecting(true)
+        //     const web3 = new Web3(window.ethereum)
+        //     try {
+        //         await window.ethereum.enable()
+        //         changeConnected(true)
+        //         const accounts = await web3.eth.getAccounts()
+        //         changeConnecting(false)
+        //         if (accounts) {
+        //             changeConnected(true)
+        //             changeEthAddress(accounts[0])
+        //         }
+        //         else changeConnectError(errorNoWallet)
+        //     } catch (error) {
+        //         changeConnecting(false)
+        //         changeConnectError(errorWalletConnectionTrouble)
+        //     }
+        // } 
+        // else changeConnectError(errorNoWallet)
     }
 
     const connectButton = (callBackOnPress) => 
