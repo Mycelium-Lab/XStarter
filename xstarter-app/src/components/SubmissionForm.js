@@ -11,9 +11,11 @@ export default function SubmissionForm() {
 
     const createAirTablePayload = values => ({
         ...values,
+        name: values.name.trim(),
+        surname: values.surname.trim(),
         want_to_invest: values.want_to_invest ? parseFloat(values.want_to_invest) : 0,
-        twitter: values.twitter ? `https://twitter.com/${values.twitter}` : null,
-        telegram: values.telegram ? `https://t.me/${values.telegram}` : null
+        twitter: values.twitter ? `https://twitter.com/${values.twitter.trim()}` : null,
+        telegram: values.telegram ? `https://t.me/${values.telegram.trim()}` : null
     })
 
     const [submissionStatusComponent, changeSubmissionStatusComponent] = useState(null)
@@ -62,7 +64,7 @@ export default function SubmissionForm() {
     const requiredETHAddress = value => (value ? undefined : 'Please connect your wallet.')
     const mustBeNumber = value => (isNaN(value) ? 'Please enter a number.' : undefined)
     const mustBeGreaterThanZero = value => (value <= 0 ? 'Please enter a number greater than 0.' : undefined)
-    const nameValidator = value => ((/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(value)) ? undefined : 'Please fill in this field with letters only.')
+    const nameValidator = value => ((/^[a-zA-Z ,.'-]+$/u.test(value)) && value?.trim() ? undefined : 'Please fill in this field with latin letters.')
     const composeValidators = (...validators) => value =>
         validators.reduce((error, validator) => error || validator(value), undefined)
 
