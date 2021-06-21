@@ -144,7 +144,7 @@ export default function SubmissionForm() {
                                 >
                                     {({ input, meta }) => (
                                         <>
-                                            <input {...input} className={!meta.touched ? '' : !meta.error ? 'input__ok' : 'input__error'} type="number" placeholder="Amount to invest (ETH) *" />
+                                            <input {...input} className={!meta.touched ? '' : !meta.error ? 'input__ok' : 'input__error'} type="number" min="0" placeholder="Amount to invest (ETH) *" />
                                             { meta.error && meta.touched && 
                                                 <div className="div__form-errors">
                                                     <span className="status-error">{meta.error}</span>
