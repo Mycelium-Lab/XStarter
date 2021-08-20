@@ -51,21 +51,19 @@ export default function ConnectButton({connectionCallback}) {
         changeConnectError(null)
         if (window.ethereum) {
             changeConnecting(true)
-            const web3 = new Web3(window.ethereum)
-            try {
-                await window.ethereum.enable()
-                changeConnected(true)
-                const accounts = await web3.eth.getAccounts()
-                changeConnecting(false)
-                if (accounts) {
-                    changeConnected(true)
-                    changeEthAddress(accounts[0])
-                }
-                else changeConnectError(errorNoWallet)
-            } catch (error) {
-                changeConnecting(false)
-                changeConnectError(errorWalletConnectionTrouble)
-            }
+            await window.ethereum
+                .request({ method: "eth_requestAccounts" })
+                .then(accounts => {
+                    if (Array.isArray(accounts)) {
+                        changeConnected(true)
+                        changeEthAddress(accounts[0])
+                    }
+                    else changeConnectError(errorNoWallet)
+                })
+                .catch(() => {
+                    changeConnecting(false)
+                    changeConnectError(errorWalletConnectionTrouble)
+                })
         } 
         else changeConnectError(errorNoWallet)
     }
